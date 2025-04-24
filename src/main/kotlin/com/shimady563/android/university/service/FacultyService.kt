@@ -1,6 +1,7 @@
 package com.shimady563.android.university.service
 
 import com.shimady563.android.university.exception.ResourceNotFoundException
+import com.shimady563.android.university.model.Faculty
 import com.shimady563.android.university.model.dto.FacultyDto
 import com.shimady563.android.university.repository.FacultyRepository
 import com.shimady563.android.university.toFaculty
@@ -21,10 +22,9 @@ class FacultyService(private val facultyRepository: FacultyRepository) {
     }
 
     @Transactional(readOnly = true)
-    fun getFacultyById(id: UUID): FacultyDto {
+    protected fun getFacultyById(id: UUID): Faculty {
         return facultyRepository.findById(id)
             .orElseThrow { ResourceNotFoundException("Faculty with id: $id not found") }
-            .toFacultyDto()
     }
 
     @Transactional
@@ -35,7 +35,7 @@ class FacultyService(private val facultyRepository: FacultyRepository) {
 
     @Transactional
     fun updateFaculty(id: UUID, request: FacultyDto) {
-        val oldFaculty = getFacultyById(id).toFaculty()
+        val oldFaculty = getFacultyById(id)
         oldFaculty.name = request.name
         facultyRepository.save(oldFaculty)
     }
