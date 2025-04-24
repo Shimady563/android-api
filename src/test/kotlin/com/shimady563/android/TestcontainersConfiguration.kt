@@ -9,10 +9,12 @@ import org.testcontainers.utility.DockerImageName
 @TestConfiguration(proxyBeanMethods = false)
 class TestcontainersConfiguration {
 
-	@Bean
-	@ServiceConnection
-	fun postgresContainer(): PostgreSQLContainer<*> {
-		return PostgreSQLContainer(DockerImageName.parse("postgres:latest"))
-	}
+    @Bean
+    @ServiceConnection
+    fun postgresContainer(): PostgreSQLContainer<*> {
+        return PostgreSQLContainer(DockerImageName.parse("postgres:alpine"))
+            .withUsername("postgres")
+            .withPassword("postgres");
+    }
 
 }
