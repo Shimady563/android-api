@@ -22,7 +22,7 @@ class FacultyService(private val facultyRepository: FacultyRepository) {
     }
 
     @Transactional(readOnly = true)
-    protected fun getFacultyById(id: UUID): Faculty {
+    internal fun getFacultyById(id: UUID): Faculty {
         return facultyRepository.findById(id)
             .orElseThrow { ResourceNotFoundException("Faculty with id: $id not found") }
     }
