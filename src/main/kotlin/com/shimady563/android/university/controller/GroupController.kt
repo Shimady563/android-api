@@ -27,6 +27,6 @@ class GroupController(private val groupService: GroupService) {
 
     @GetMapping("/faculty")
     fun getGroupsByFacultyId(@RequestParam facultyId: UUID): List<GroupDto> {
-        return groupService.getGroupByFacultyId(facultyId)
+        return groupService.getGroupsByFacultyId(facultyId)
     }
 }
