@@ -1,3 +1,3 @@
-package com.shimady563.android.university.exception
+package com.shimady563.android.exception
 
 class ResourceNotFoundException(message: String) : RuntimeException(message)
