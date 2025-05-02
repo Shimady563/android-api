@@ -1,6 +1,6 @@
 package com.shimady563.android.university.service
 
-import com.shimady563.android.exception.ResourceNotFoundException
+import com.shimady563.android.common.exception.ResourceNotFoundException
 import com.shimady563.android.university.model.Faculty
 import com.shimady563.android.university.model.dto.FacultyDto
 import com.shimady563.android.university.repository.FacultyRepository

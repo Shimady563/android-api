@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @RestController
-@RequestMapping("/exhibitions")
+@RequestMapping("/paintings")
 class PaintingController(private val paintingService: PaintingService) {
 
     @GetMapping("")
     fun getAllPaintings(): List<PaintingDto> {
-        return paintingService.getAllPaintings()
+        return paintingService.getAll()
     }
 
     @PostMapping("")
@@ -22,11 +22,11 @@ class PaintingController(private val paintingService: PaintingService) {
 
     @PutMapping("/{id}")
     fun updatePainting(@PathVariable id: UUID, @Valid @RequestBody request: PaintingDto) {
-        return paintingService.updatePainting(id, request)
+        return paintingService.updateById(id, request)
     }
 
     @DeleteMapping("{id}")
     fun deletePainting(@PathVariable id: UUID) {
-        return paintingService.deletePaintingById(id)
+        return paintingService.deleteById(id)
     }
 }

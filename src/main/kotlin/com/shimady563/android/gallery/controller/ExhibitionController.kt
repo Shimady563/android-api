@@ -12,21 +12,21 @@ class ExhibitionController(private val exhibitionService: ExhibitionService) {
 
     @GetMapping("")
     fun getAllExhibitions(): List<ExhibitionDto> {
-        return exhibitionService.getAllExhibitions()
+        return exhibitionService.getAll()
     }
 
     @PostMapping("")
     fun createExhibition(@Valid @RequestBody request: ExhibitionDto) {
-        exhibitionService.createExhibition(request)
+        exhibitionService.create(request)
     }
 
     @PutMapping("/{id}")
     fun updateExhibition(@PathVariable id: UUID, @Valid @RequestBody request: ExhibitionDto) {
-        return exhibitionService.updateExhibition(id, request)
+        return exhibitionService.updateById(id, request)
     }
 
     @DeleteMapping("{id}")
     fun deleteExhibition(@PathVariable id: UUID) {
-        return exhibitionService.deleteExhibitionById(id)
+        return exhibitionService.deleteById(id)
     }
 }

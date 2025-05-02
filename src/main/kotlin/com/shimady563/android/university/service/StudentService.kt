@@ -1,6 +1,6 @@
 package com.shimady563.android.university.service
 
-import com.shimady563.android.exception.ResourceNotFoundException
+import com.shimady563.android.common.exception.ResourceNotFoundException
 import com.shimady563.android.university.model.Group
 import com.shimady563.android.university.model.Student
 import com.shimady563.android.university.model.dto.StudentDto
@@ -10,6 +10,8 @@ import com.shimady563.android.university.toStudentDto
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.util.*
 
 @Service
@@ -49,7 +51,7 @@ class StudentService(
         oldStudent.firstName = request.firstName
         oldStudent.lastName = request.lastName
         oldStudent.middleName = request.middleName
-        oldStudent.birthDate = request.birthDate
+        oldStudent.birthDate = LocalDateTime.ofInstant(request.birthDate.toInstant(), ZoneId.systemDefault())
         oldStudent.gender = request.gender
         oldStudent.phone = request.phone
         val group = groupService.getGroupById(request.groupId)

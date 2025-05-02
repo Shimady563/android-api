@@ -12,21 +12,21 @@ class ArtistController(private val artistService: ArtistService) {
 
     @GetMapping("")
     fun getAllArtists(): List<ArtistDto> {
-        return artistService.getAllArtists()
+        return artistService.getAll()
     }
 
     @PostMapping("")
     fun createArtist(@Valid @RequestBody request: ArtistDto) {
-        artistService.createArtist(request)
+        artistService.create(request)
     }
 
     @PutMapping("/{id}")
     fun updateArtist(@PathVariable id: UUID, @Valid @RequestBody request: ArtistDto) {
-        return artistService.updateArtist(id, request)
+        return artistService.updateById(id, request)
     }
 
     @DeleteMapping("{id}")
     fun deleteArtist(@PathVariable id: UUID) {
-        return artistService.deleteArtistById(id)
+        return artistService.deleteById(id)
     }
 }
