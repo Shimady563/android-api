@@ -8,7 +8,7 @@ data class StudentDto(
     var lastName: String,
     var firstName: String,
     var middleName: String,
-    var birthDate: LocalDateTime,
+    var birthDate: Date,
     var phone: String,
     var gender: Int,
     var groupId: UUID

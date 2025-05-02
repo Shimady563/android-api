@@ -6,13 +6,16 @@ import com.shimady563.android.university.model.Student
 import com.shimady563.android.university.model.dto.FacultyDto
 import com.shimady563.android.university.model.dto.GroupDto
 import com.shimady563.android.university.model.dto.StudentDto
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.util.*
 
 fun StudentDto.toStudent() = Student(
     id,
     lastName,
     firstName,
     middleName,
-    birthDate,
+    LocalDateTime.ofInstant(birthDate.toInstant(), ZoneId.systemDefault()),
     phone,
     gender
 )
@@ -22,7 +25,7 @@ fun Student.toStudentDto() = StudentDto(
     lastName,
     firstName,
     middleName,
-    birthDate,
+    Date.from(birthDate.atZone(ZoneId.systemDefault()).toInstant()),
     phone,
     gender,
     group?.id!!

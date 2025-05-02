@@ -10,8 +10,5 @@ class Faculty(
     var id: UUID? = null,
 
     @Column(name = "name", nullable = false)
-    var name: String,
-
-    @OneToMany(fetch = FetchType.LAZY, targetEntity = Group::class)
-    var groups: List<Group> = emptyList()
+    var name: String
 )

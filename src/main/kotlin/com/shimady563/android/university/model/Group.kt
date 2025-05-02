@@ -14,8 +14,5 @@ class Group(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "faculty_id")
-    var faculty: Faculty? = null,
-
-    @OneToMany(fetch = FetchType.LAZY, targetEntity = Student::class)
-    var students: List<Student> = emptyList()
+    var faculty: Faculty? = null
 )
