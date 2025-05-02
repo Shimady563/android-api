@@ -29,4 +29,9 @@ class GroupController(private val groupService: GroupService) {
     fun getGroupsByFacultyId(@RequestParam facultyId: UUID): List<GroupDto> {
         return groupService.getGroupsByFacultyId(facultyId)
     }
+
+    @DeleteMapping("{id}")
+    fun deleteGroup(@PathVariable id: UUID) {
+        return groupService.deleteGroupById(id)
+    }
 }

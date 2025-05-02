@@ -64,4 +64,10 @@ class StudentService(
         return studentRepository.findByGroup(group)
             .map { it.toStudentDto() }
     }
+
+    @Transactional
+    fun deleteStudentById(id: UUID) {
+        log.info("Deleting student with id: $id")
+        studentRepository.deleteById(id)
+    }
 }

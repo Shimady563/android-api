@@ -59,4 +59,10 @@ class GroupService(
         return groupRepository.findByFaculty(faculty)
             .map { it.toGroupDto() }
     }
+
+    @Transactional
+    fun deleteGroupById(id: UUID) {
+        log.info("Deleting group with id: $id")
+        groupRepository.deleteById(id)
+    }
 }

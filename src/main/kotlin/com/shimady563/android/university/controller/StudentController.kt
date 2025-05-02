@@ -29,4 +29,9 @@ class StudentController(private val studentService: StudentService) {
     fun getStudentsByGroupId(@RequestParam groupId: UUID): List<StudentDto> {
         return studentService.getStudentsByGroupId(groupId)
     }
+
+    @DeleteMapping("{id}")
+    fun deleteStudent(@PathVariable id: UUID) {
+        return studentService.deleteStudentById(id)
+    }
 }

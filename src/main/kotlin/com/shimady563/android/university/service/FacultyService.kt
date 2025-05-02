@@ -43,4 +43,10 @@ class FacultyService(private val facultyRepository: FacultyRepository) {
         oldFaculty.name = request.name
         facultyRepository.save(oldFaculty)
     }
+
+    @Transactional
+    fun deleteFacultyById(id: UUID) {
+        log.info("Deleting faculty with id: $id")
+        facultyRepository.deleteById(id)
+    }
 }

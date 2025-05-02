@@ -24,4 +24,9 @@ class FacultyController(private val facultyService: FacultyService) {
     fun updateFaculty(@PathVariable id: UUID, @Valid @RequestBody request: FacultyDto) {
         return facultyService.updateFaculty(id, request)
     }
+
+    @DeleteMapping("{id}")
+    fun deleteFaculty(@PathVariable id: UUID) {
+        return facultyService.deleteFacultyById(id)
+    }
 }
