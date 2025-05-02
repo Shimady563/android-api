@@ -1,4 +1,4 @@
-package com.shimady563.android.exception
+package com.shimady563.android.common.exception
 
 data class ValidationError(
     private val violations: List<Violation>,

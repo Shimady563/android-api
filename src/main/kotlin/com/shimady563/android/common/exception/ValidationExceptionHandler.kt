@@ -1,6 +1,6 @@
-package com.shimady563.android.exception
+package com.shimady563.android.common.exception
 
-import com.shimady563.android.exception.ValidationError.Violation
+import com.shimady563.android.common.exception.ValidationError.Violation
 import jakarta.validation.ConstraintViolation
 import jakarta.validation.ConstraintViolationException
 import lombok.extern.slf4j.Slf4j

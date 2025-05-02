@@ -1,4 +1,4 @@
-package com.shimady563.android.exception
+package com.shimady563.android.common.exception
 
 import org.slf4j.LoggerFactory
 import org.springframework.dao.DataAccessException
