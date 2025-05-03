@@ -17,7 +17,7 @@ class PaintingController(private val paintingService: PaintingService) {
 
     @PostMapping("")
     fun createPainting(@Valid @RequestBody request: PaintingDto) {
-        paintingService.createPainting(request)
+        paintingService.create(request)
     }
 
     @PutMapping("/{id}")

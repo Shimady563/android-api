@@ -22,7 +22,7 @@ class PaintingService(
 ) {
 
     @Transactional
-    fun createPainting(request: PaintingDto) {
+    override fun create(request: PaintingDto) {
         log.info("Creating painting from request: $request")
         val painting = mapper.toEntity(request)
         val artist = artistService.getById(request.artistId)
