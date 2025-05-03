@@ -12,21 +12,21 @@ class FacultyController(private val facultyService: FacultyService) {
 
     @GetMapping("")
     fun getAllFaculties(): List<FacultyDto> {
-        return facultyService.getAllFaculties()
+        return facultyService.getAll()
     }
 
     @PostMapping("")
     fun createFaculty(@Valid @RequestBody request: FacultyDto) {
-        facultyService.createFaculty(request)
+        facultyService.create(request)
     }
 
     @PutMapping("/{id}")
     fun updateFaculty(@PathVariable id: UUID, @Valid @RequestBody request: FacultyDto) {
-        return facultyService.updateFaculty(id, request)
+        return facultyService.updateById(id, request)
     }
 
     @DeleteMapping("{id}")
     fun deleteFaculty(@PathVariable id: UUID) {
-        return facultyService.deleteFacultyById(id)
+        return facultyService.deleteById(id)
     }
 }

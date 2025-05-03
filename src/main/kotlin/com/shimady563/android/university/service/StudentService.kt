@@ -1,13 +1,11 @@
 package com.shimady563.android.university.service
 
-import com.shimady563.android.common.exception.ResourceNotFoundException
+import com.shimady563.android.common.mapping.Mapper
+import com.shimady563.android.common.service.AbstractService
 import com.shimady563.android.university.model.Group
 import com.shimady563.android.university.model.Student
 import com.shimady563.android.university.model.dto.StudentDto
 import com.shimady563.android.university.repository.StudentRepository
-import com.shimady563.android.university.toStudent
-import com.shimady563.android.university.toStudentDto
-import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
@@ -16,60 +14,43 @@ import java.util.*
 
 @Service
 class StudentService(
-    private val studentRepository: StudentRepository,
+    studentRepository: StudentRepository,
+    mapper: Mapper<Student, StudentDto>,
     private val groupService: GroupService
+) : AbstractService<StudentDto, Student, StudentRepository>(
+    studentRepository,
+    mapper
 ) {
-    private val log = LoggerFactory.getLogger(this.javaClass)
-
-    @Transactional(readOnly = true)
-    fun getAllStudents(): List<StudentDto> {
-        log.info("Getting all students")
-        return studentRepository.findAll()
-            .map { it.toStudentDto() }
-    }
-
-    @Transactional(readOnly = true)
-    internal fun getStudentById(id: UUID): Student {
-        log.info("Getting student with id: $id")
-        return studentRepository.findById(id)
-            .orElseThrow { ResourceNotFoundException("Student with id: $id not found") }
-    }
 
     @Transactional
-    fun createStudent(request: StudentDto) {
+    override fun create(request: StudentDto) {
         log.info("Creating student from request: $request")
-        val student = request.toStudent()
-        val group = groupService.getGroupById(request.groupId)
+        val student = mapper.toEntity(request)
+        val group = groupService.getById(request.groupId)
         student.group = group
-        studentRepository.save(student)
+        repository.save(student)
     }
 
     @Transactional
-    fun updateStudent(id: UUID, request: StudentDto) {
+    override fun updateById(id: UUID, request: StudentDto) {
         log.info("Updating student with id: $id, request: $request")
-        val oldStudent = getStudentById(id)
+        val oldStudent = getById(id)
         oldStudent.firstName = request.firstName
         oldStudent.lastName = request.lastName
         oldStudent.middleName = request.middleName
         oldStudent.birthDate = LocalDateTime.ofInstant(request.birthDate.toInstant(), ZoneId.systemDefault())
         oldStudent.gender = request.gender
         oldStudent.phone = request.phone
-        val group = groupService.getGroupById(request.groupId)
+        val group = groupService.getById(request.groupId)
         oldStudent.group = group
-        studentRepository.save(oldStudent)
+        repository.save(oldStudent)
     }
 
     @Transactional(readOnly = true)
-    fun getStudentsByGroupId(groupId: UUID): List<StudentDto> {
+    fun getByGroupId(groupId: UUID): List<StudentDto> {
         log.info("Getting students with group id: $groupId")
-        val group: Group = groupService.getGroupById(groupId)
-        return studentRepository.findByGroup(group)
-            .map { it.toStudentDto() }
-    }
-
-    @Transactional
-    fun deleteStudentById(id: UUID) {
-        log.info("Deleting student with id: $id")
-        studentRepository.deleteById(id)
+        val group: Group = groupService.getById(groupId)
+        return repository.findByGroup(group)
+            .map { mapper.toDto(it) }
     }
 }

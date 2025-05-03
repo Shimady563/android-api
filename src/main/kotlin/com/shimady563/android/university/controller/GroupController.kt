@@ -12,26 +12,26 @@ class GroupController(private val groupService: GroupService) {
 
     @GetMapping("")
     fun getAllGroups(): List<GroupDto> {
-        return groupService.getAllGroups()
+        return groupService.getAll()
     }
 
     @PostMapping("")
     fun createGroup(@Valid @RequestBody request: GroupDto) {
-        groupService.createGroup(request)
+        groupService.create(request)
     }
 
     @PutMapping("/{id}")
     fun updateGroup(@PathVariable id: UUID, @Valid @RequestBody request: GroupDto) {
-        return groupService.updateGroup(id, request)
+        return groupService.updateById(id, request)
     }
 
     @GetMapping("/faculty")
     fun getGroupsByFacultyId(@RequestParam facultyId: UUID): List<GroupDto> {
-        return groupService.getGroupsByFacultyId(facultyId)
+        return groupService.getByFacultyId(facultyId)
     }
 
     @DeleteMapping("{id}")
     fun deleteGroup(@PathVariable id: UUID) {
-        return groupService.deleteGroupById(id)
+        return groupService.deleteById(id)
     }
 }
