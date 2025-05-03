@@ -16,7 +16,7 @@ class PaintingService(
     paintingRepository: PaintingRepository,
     mapper: Mapper<Painting, PaintingDto>,
     private val artistService: ArtistService
-) : AbstractService<PaintingDto, Painting, PaintingRepository>(
+) : AbstractService<Painting, PaintingDto>(
     paintingRepository,
     mapper
 ) {

@@ -13,7 +13,7 @@ import java.util.*
 class FacultyService(
     facultyRepository: FacultyRepository,
     mapper: Mapper<Faculty, FacultyDto>
-) : AbstractService<FacultyDto, Faculty, FacultyRepository>(
+) : AbstractService<Faculty, FacultyDto>(
     facultyRepository,
     mapper
 ) {

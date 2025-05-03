@@ -17,7 +17,7 @@ class StudentService(
     studentRepository: StudentRepository,
     mapper: Mapper<Student, StudentDto>,
     private val groupService: GroupService
-) : AbstractService<StudentDto, Student, StudentRepository>(
+) : AbstractService<Student, StudentDto>(
     studentRepository,
     mapper
 ) {
@@ -50,7 +50,7 @@ class StudentService(
     fun getByGroupId(groupId: UUID): List<StudentDto> {
         log.info("Getting students with group id: $groupId")
         val group: Group = groupService.getById(groupId)
-        return repository.findByGroup(group)
+        return (repository as StudentRepository).findByGroup(group)
             .map { mapper.toDto(it) }
     }
 }

@@ -14,7 +14,7 @@ class ArtistService(
     artistRepository: ArtistRepository,
     mapper: Mapper<Artist, ArtistDto>,
     private val exhibitionService: ExhibitionService
-) : AbstractService<ArtistDto, Artist, ArtistRepository>(
+) : AbstractService<Artist, ArtistDto>(
     artistRepository,
     mapper
 ) {

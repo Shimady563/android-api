@@ -15,7 +15,7 @@ class GroupService(
     groupRepository: GroupRepository,
     mapper: Mapper<Group, GroupDto>,
     private val facultyService: FacultyService
-) : AbstractService<GroupDto, Group, GroupRepository>(
+) : AbstractService<Group, GroupDto>(
     groupRepository,
     mapper
 ) {
@@ -43,7 +43,7 @@ class GroupService(
     fun getByFacultyId(facultyId: UUID): List<GroupDto> {
         log.info("Getting groups with faculty id: $facultyId")
         val faculty: Faculty = facultyService.getById(facultyId)
-        return repository.findByFaculty(faculty)
+        return (repository as GroupRepository).findByFaculty(faculty)
             .map { mapper.toDto(it) }
     }
 }

@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
 @org.springframework.stereotype.Service
-abstract class AbstractService<D, E : Any, ER : JpaRepository<E, UUID>>(
-    internal val repository: ER,
+abstract class AbstractService<E : Any, D>(
+    internal val repository: JpaRepository<E, UUID>,
     internal val mapper: Mapper<E, D>
 ) : Service<D> {
     internal val log = LoggerFactory.getLogger(this.javaClass)

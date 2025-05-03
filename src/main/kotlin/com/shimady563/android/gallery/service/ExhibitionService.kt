@@ -13,7 +13,7 @@ import java.util.*
 class ExhibitionService(
     exhibitionRepository: ExhibitionRepository,
     mapper: Mapper<Exhibition, ExhibitionDto>
-) : AbstractService<ExhibitionDto, Exhibition, ExhibitionRepository>(
+) : AbstractService<Exhibition, ExhibitionDto>(
     exhibitionRepository,
     mapper
 ) {
