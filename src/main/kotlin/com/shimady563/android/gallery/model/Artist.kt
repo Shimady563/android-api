@@ -4,7 +4,7 @@ import jakarta.persistence.*
 import java.util.*
 
 @Entity
-@Table(name = "exhibition")
+@Table(name = "artist")
 class Artist(
     @Id
     var id: UUID? = null,
