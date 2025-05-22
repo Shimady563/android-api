@@ -14,5 +14,13 @@ class Group(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "faculty_id")
-    var faculty: Faculty? = null
+    var faculty: Faculty? = null,
+
+    @OneToMany(
+        targetEntity = Student::class,
+        fetch = FetchType.LAZY,
+        mappedBy = "group",
+        cascade = [CascadeType.ALL]
+    )
+    var students: List<Student> = emptyList()
 )
